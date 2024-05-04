@@ -1,0 +1,12 @@
+\chapter{Implementazione}
+In questo capitolo verrà descritto come è sono stati tradotti in codice gli algoritmi descritti nei capitoli precedenti.
+E' stato implementato un planner per ogni prova della gara: \index{1}acceleration, \index{2}skidpad, \index{3}autocross e trackdrive, che condividendo lo stesso tracciato condividono lo stesso planner. 
+Ogni planner viene inizializzato all'interno di un nodo ROS che ha anche le responsabilità di reperire il tipo della prova e istanziare  publishers e subscribers.
+\section{Local planner node}
+Il nodo è stato definito nel file \texttt{local\_planner\_node.h} ed è stato implementato nel file \texttt{local\_planner\_node.cpp}. Il nodo si prende a carico le seguenti responsabilità:
+\begin{itemize}
+	\item Reperire i parametri relativi ai topic e il parametro relativo al tipo di evento dal file di configurazione.
+	\item Inizializzare i publishers che sono comuni a tutte le prove.
+	\item Inizializzare il planner corrispondente al tipo di evento contenuto nel parametro "node/eventType". 
+	\item inizializzare i subscribers specifici facendo il bind fra le callback del planner e i topic necessari.
+\end{itemize} 
